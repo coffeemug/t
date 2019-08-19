@@ -1,7 +1,7 @@
 module T
   module Printable # rubocop:disable ModuleLength
     LIST_HEADINGS = ['ID', 'Created at', 'Screen name', 'Slug', 'Members', 'Subscribers', 'Mode', 'Description'].freeze
-    TWEET_HEADINGS = ['ID', 'Posted at', 'Screen name', 'Text'].freeze
+    TWEET_HEADINGS = ['ID', 'Posted at', 'Screen name', 'Retweets', 'Favorites', 'Text'].freeze
     USER_HEADINGS = ['ID', 'Since', 'Last tweeted at', 'Tweets', 'Favorites', 'Listed', 'Following', 'Followers', 'Screen name', 'Name', 'Verified', 'Protected', 'Bio', 'Status', 'Location', 'URL'].freeze
     MONTH_IN_SECONDS = 2_592_000
 
@@ -12,7 +12,7 @@ module T
     end
 
     def build_long_tweet(tweet)
-      [tweet.id, ls_formatted_time(tweet), "@#{tweet.user.screen_name}", decode_full_text(tweet, options['decode_uris']).gsub(/\n+/, ' ')]
+      [tweet.id, ls_formatted_time(tweet), "@#{tweet.user.screen_name}", tweet.retweet_count, tweet.favorite_count, decode_full_text(tweet, options['decode_uris']).gsub(/\n+/, ' ')]
     end
 
     def build_long_user(user)
@@ -44,7 +44,7 @@ module T
 
     def print_csv_tweet(tweet)
       require 'csv'
-      say [tweet.id, csv_formatted_time(tweet), tweet.user.screen_name, decode_full_text(tweet, options['decode_uris'])].to_csv
+      say [tweet.id, csv_formatted_time(tweet), tweet.user.screen_name, tweet.retweet_count, tweet.favorite_count, decode_full_text(tweet, options['decode_uris'])].to_csv
     end
 
     def print_csv_user(user)
