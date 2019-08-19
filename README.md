@@ -55,7 +55,7 @@ Once you've verified that Ruby is installed:
 	
 To install from a local directiory:
 
-    gem gem build t.gemspec
+    gem build t.gemspec
     gem install t-3.1.0.gem
 
 ## Configuration
