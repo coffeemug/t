@@ -105,9 +105,8 @@ module T
     end
 
     def open_or_print(uri, options)
-      Launchy.open(uri, options) do
-        say "Open: #{uri}"
-      end
+      say "Open: #{uri}"
+      Launchy.open(uri, options)
     end
 
     def parallel_map(enumerable)
