@@ -52,6 +52,11 @@ or for Red Hat-based distros like Fedora and CentOS, type:
 Once you've verified that Ruby is installed:
 
     gem install t
+	
+To install from a local directiory:
+
+    gem gem build t.gemspec
+    gem install t-3.1.0.gem
 
 ## Configuration
 Twitter API v1.1 requires OAuth for all of its functionality, so you'll need a
